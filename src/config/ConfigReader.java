@@ -14,7 +14,7 @@ public class ConfigReader {
 		Element frame=game.element("frame");
 		List<Element> layers=frame.elements("layer");
 		for(Element layer:layers){
-			System.out.println(layer.attributeValue("class")+",");
+			System.out.println(layer.attributeValue("className")+",");
 			System.out.println(layer.attributeValue("x")+",");
 			System.out.println(layer.attributeValue("y")+",");
 			System.out.println(layer.attributeValue("w")+",");
