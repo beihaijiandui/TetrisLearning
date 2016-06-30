@@ -33,10 +33,19 @@ public class GameConfig {
 	 * @param frame 配置文件的窗口配置元素
 	 */
 	private void setUiConfig(Element frame){
+		//获取窗口宽度
 		this.width=Integer.parseInt(frame.attributeValue("width"));
+		//获取窗口高度
 		this.height=Integer.parseInt(frame.attributeValue("height"));
+		//获取边框粗细
 		this.windowSize=Integer.parseInt(frame.attributeValue("windowSize"));
+		//获取边框内边距
 		this.padding=Integer.parseInt(frame.attributeValue("padding"));
+		//获取标题
+		this.title=frame.attributeValue("title");
+		//获取窗口拔高
+		this.windowUp=Integer.parseInt(frame.attributeValue("windowUp"));
+		//获取窗体属性
 		List<Element> layers=frame.elements("layer");
 		layersConfig=new ArrayList<LayerConfig>();
 		for(Element layer:layers){
@@ -51,6 +60,24 @@ public class GameConfig {
 			
 		}
 	}
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public int getWindowUp() {
+		return windowUp;
+	}
+
+	/**
+	 * 标题
+	 */
+	private String title;
+	
+	/**
+	 * 窗口拔高
+	 */
+	private int windowUp;
 	
 	/**
 	 * 配置系统参数

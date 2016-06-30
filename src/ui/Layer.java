@@ -5,6 +5,10 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
+import config.ConfigFactory;
+import config.GameConfig;
+import dto.GameDto;
+
 /**
  * 绘制窗口  里面有个abstract方法 所以该类成为abstract类（抽象类）
  * @author cc1
@@ -12,8 +16,15 @@ import javax.swing.ImageIcon;
  */
 public abstract class Layer {
 	
-	protected static final int PADDING=16;
-	private static final int SIZE=7;
+	protected static final int PADDING;//static的final常量的初始化可以放在static代码块中
+	private static final int SIZE;//非static的final常量的初始化可以放在构造函数中
+	
+	static{
+		//获得游戏配置
+	    GameConfig cfg=ConfigFactory.getGameConfig();
+		PADDING=cfg.getPadding();
+		SIZE=cfg.getWindowSize();
+	}
 	private static Image WINDOW_IMAGE=new ImageIcon("graphics/window/Window.png").getImage();
 	private static int WINDOW_W=WINDOW_IMAGE.getWidth(null);
 	private static int WINDOW_H=WINDOW_IMAGE.getHeight(null);
@@ -26,6 +37,8 @@ public abstract class Layer {
 	protected int w;
 	//窗口高度
 	protected int h;
+	//游戏数据
+	protected GameDto dto=null;
 	
 	protected Layer(int x,int y,int w,int h){
 		this.x=x;
@@ -62,7 +75,12 @@ public abstract class Layer {
 	}
 	/*
 	 * abstract方法就是为了让子类去重写这个方法，所以自己不必定义方法体
+	 * 刷新游戏具体内容
 	 * @param g 画笔
 	 */
 	abstract public void paint(Graphics g);
+
+	public void setDto(GameDto dto) {
+		this.dto = dto;
+	}
 }
